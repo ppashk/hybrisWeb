@@ -1,0 +1,17 @@
+body {
+	background: url(../img/background.jpg) no-repeat;
+	background-size: cover;
+	font-family: 'Pathway Gothic One', arial, sans-serif;
+	color: #4e5050;
+	font-size: 16px;
+}
+#wrapper {
+	max-width: 1024px;
+	margin: 0 auto;
+}
+main {
+	width: 100%;
+	background: #ffffff;
+	padding: 5%;
+	margin: auto;
+}

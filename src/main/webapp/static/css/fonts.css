@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Pathway Gothic One';
+    src: url('../fonts/PathwayGothicOne-Regular.eot');
+    src: url('../fonts/PathwayGothicOne-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/PathwayGothicOne-Regular.woff2') format('woff2'),
+    url('../fonts/PathwayGothicOne-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
