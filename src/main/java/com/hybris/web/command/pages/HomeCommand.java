@@ -32,25 +32,37 @@ public class HomeCommand extends MultipleMethodCommand {
         String action = request.getParameter("action");
         switch (action) {
             case "createProduct":
-                service.createProduct(request.getParameter("name"), request.getParameter("price"), request.getParameter("statusType"));
+                if (service.createProduct(request.getParameter("name"),
+                        request.getParameter("price"),
+                        request.getParameter("statusType")))
+                    return new Page(HOME_REDIRECT, true);
                 break;
             case "removeProduct":
-                service.removeProduct(request.getParameter("productId"));
+                if (service.removeProduct(request.getParameter("productId")))
+                    return new Page(HOME_REDIRECT, true);
                 break;
-            case "removeAllProduct":
-                service.removeAllProducts(request.getParameter("password"));
+            case "removeAllProducts":
+                if (service.removeAllProducts(request.getParameter("password")))
+                    return new Page(HOME_REDIRECT, true);
                 break;
             case "createOrder":
-                service.createOrder(request.getParameterValues("productIds"));
+                if (service.createOrder(request.getParameterValues("productIds")))
+                    return new Page(HOME_REDIRECT, true);
                 break;
             case "searchOrder":
                 request.getSession().setAttribute("orderById", service.getOrderById(request.getParameter("orderId")));
                 request.getSession().setAttribute("totalPrice", service.getTotalPrice(request.getParameter("orderId")));
                 request.getSession().setAttribute("productsByOrderId", service.getProductsById(request.getParameter("orderId")));
-                break;
+                return new Page(HOME_REDIRECT, true);
             case "updateOrder":
-                service.updateOrder(request.getParameter("orderId"), request.getParameter("userId"), request.getParameter("status"), request.getParameter("created_at"));
+                if (service.updateOrder(request.getParameter("orderId"),
+                        request.getParameter("userId"),
+                        request.getParameter("status"),
+                        request.getParameter("created_at")))
+                    return new Page(HOME_REDIRECT, true);
                 break;
+            default:
+                return new Page(HOME_REDIRECT, true);
         }
         return new Page(HOME_REDIRECT, true);
     }

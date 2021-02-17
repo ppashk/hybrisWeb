@@ -87,8 +87,7 @@ public class Service {
     public boolean createProduct(String name, String stringPrice, String stringStatus) {
         Date date = new Date();
         try {
-            if (productDao.create(new Product(name, Integer.parseInt(stringPrice), ProductStatus.valueOf(stringStatus), new Timestamp(date.getTime()))))
-                LOG.info("Name: " + name + ", price: " + stringPrice + ", status: " + stringStatus + ", time: " + new Timestamp(date.getTime()));
+            return productDao.create(new Product(name, Integer.parseInt(stringPrice), ProductStatus.valueOf(stringStatus), new Timestamp(date.getTime())));
         } catch (Exception e) {
             LOG.error("Name: " + name + ", price: " + stringPrice + ", status: " + stringPrice + ", time: " + new Timestamp(date.getTime()));
         }
@@ -111,6 +110,7 @@ public class Service {
                 if (orderId != 0)
                     addProductToOrder(orderId, productId);
             }
+            return true;
         } catch (Exception e) {
             LOG.error("Cannot create order");
         }
@@ -125,7 +125,7 @@ public class Service {
                 order.setUserId(Integer.parseInt(userId));
             if (!status.equals(""))
                 order.setStatus(status);
-            if (createdAt != "")
+            if (!createdAt.equals(""))
                 order.setCreatedAt(createdAt.replace("T", " "));
             return orderDao.update(order);
         } catch (Exception e) {
@@ -151,12 +151,11 @@ public class Service {
         } else return false;
     }
 
-    private boolean addProductToOrder(int stringOrderId, String stringProductId) {
+    private void addProductToOrder(int stringOrderId, String stringProductId) {
         try {
-            return orderDao.query("INSERT INTO order_product (order_id, product_id) VALUE (" + stringOrderId + ", " + stringProductId + ")");
+            orderDao.query("INSERT INTO order_product (order_id, product_id) VALUE (" + stringOrderId + ", " + stringProductId + ")");
         } catch (Exception e) {
             LOG.error("OrderId: " + stringOrderId + ", ProductId: " + stringProductId);
         }
-        return false;
     }
 }

@@ -61,7 +61,7 @@
                         <label>
                             <input type="number" name="password" placeholder="input password" class="text-input" required>
                         </label>
-                        <button type="submit" name="action" value="removeAllProduct" class="button">Remove All Product</button>
+                        <button type="submit" name="action" value="removeAllProducts" class="button">Remove All Product</button>
                     </form>
                 </c:when>
                 <c:otherwise>
